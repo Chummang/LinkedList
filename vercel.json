@@ -1,2 +1,2 @@
 
-{ "version": 2, "rewrites": [{ "source": "./app.js", "destination": "/" }] }
+{ "version": 2, "rewrites": [{ "source": "/(.*)", "destination": "/routes" }] }
