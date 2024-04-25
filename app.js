@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 require("dotenv").config();
-
+const MemoryStore = require('memorystore')(session)
 const app = express();
 
 const userRoutes = require("./routes/user");
@@ -15,9 +15,15 @@ mongoose.connect(process.env.DBURI, () => {
 });
 // session
 app.use(session({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+        checkPeriod: 86400000 // prune expired entries every 24h
+      }),
+      resave: false,
     secret: process.env.SESSION_SECRET_KEY,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    secret: process.env.MEMORYSTORE_KEY
 }))
 
 app.set("view engine", "ejs");
