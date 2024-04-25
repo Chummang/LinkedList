@@ -1,0 +1,98 @@
+<%- include("../includes/head.ejs") %>
+<link rel="stylesheet" href="/css/home.css">
+<script src="/scripts/jobList.js" defer></script>
+<script src="/scripts/matchRate.js" defer></script>
+<title><%= title %></title>
+</head>
+
+<body class="ff-primary bg-primary-300">
+    <%- include("../includes/logged-in-navigation.ejs") %>
+    <section class="job-dashboard-section grid">
+        <div class="job-dashboard-container flex bg-neutral-100">
+            <h1 class="job-dashboard-title fw-semi-bold text-neutral-500 fs-700"><%= pageTitle %></h1>
+            <% if (view === "viewJobs") { %>
+            <form action="/filter-jobs" method="POST" class="job-filter-form">
+                <label for="" class="job-filter-label text-neutral-500 fs-600">Filter <i
+                        class="fa-solid fa-filter"></i></label>
+                <div class="job-filter-button-container flex">
+                    <div class="filter-utility-container flex">
+                        <div class="language-filter-container">
+                            <button class="language-selector-button filter-button flex">Language <i
+                                    class="fa-solid fa-code"></i></button>
+                            <div class="filter-popup language-input-container grid bg-neutral-100">
+                                <input type="search" class="search-language-input bg-primary-300" placeholder="Search">
+                                <% languages.forEach(language => { %>
+                                <div class="language-checkbox-container flex bg-primary-300">
+                                    <label for="<%= language.name %>"
+                                        class="language-checkbox"><%= language.name %></label>
+                                    <input type="checkbox" name="<%= language.name %>" class="language-checkbox-input">
+                                </div>
+                                <% }) %>
+                            </div>
+                        </div>
+                        <div class="salary-filter-container">
+                            <button class="filter-button salary-selector-button flex">Salary <i
+                                    class="fa-solid fa-dollar-sign"></i></button>
+                            <div class="filter-popup salary-input-container grid bg-neutral-100">
+                                <input name="minSalary" type="number" class="min-salary-input bg-primary-300"
+                                    placeholder="Min salary" min="0">
+                            </div>
+                        </div>
+                        <button class="search-button bg-primary-300"><i
+                                class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <div class="sort-utility-container">
+                        <div class="sort-by">
+                            <a href="/jobs" class="filter-button flex">Clear filters <i
+                                    class="fa-solid fa-square-minus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <% } %>
+            <% if (jobs.length > 0) {for (let i = 0; i < jobs.length; i++){ %>
+            <div class="job-container flex bg-primary-300">
+                <div class="job-main-information-container">
+                    <h3 class="job-title fw-semi-bold text-neutral-500 fs-700"><%= jobs[i].job_title %></h3>
+                    <h4 class="company-title fw-regular text-neutral-400 fs-600"><%= jobs[i].company_id.name %></h4>
+                    <p class="salary-display text-neutral-400">$<%= jobs[i].min_salary %> - $<%= jobs[i].max_salary %>
+                        HKD
+                    </p>
+                </div>
+                <div class="job-utility-container flex">
+                    <div class="match-rate-container grid">
+                        <p class="text-neutral-500">Match Rate</p>
+                        <div class="match-percentage-indicator grid">
+                            <span class="match-percentage text-neutral-500"><%= matchingRates[i] %>%</span>
+                        </div>
+                    </div>
+                    <div class="job-button-container grid">
+                        <% if (view === "viewJobs") { %>
+                        <form action="/save-job/<%= jobs[i].id %>" method="POST" class="flex">
+                            <button type="submit"
+                                class="save-job-button job-button flex bg-primary-500 text-neutral-100">Save<i
+                                    class="fa-solid fa-bookmark"></i></button>
+                        </form>
+                        <% } else if (view === "viewSavedJobs") { %>
+                        <form action="/delete-saved-job/<%= jobs[i].id %>" method="POST" class="flex">
+                            <button type="submit"
+                                class="save-job-button job-button flex bg-primary-500 text-neutral-100">Delete<i
+                                    class="fa-solid fa-trash"></i></button>
+                        </form>
+                        <% } %>
+                        <form action="/job-info/<%= jobs[i].id %>" method="GET" class="flex">
+                            <button type="submit"
+                                class="apply-button job-button flex bg-primary-500 text-neutral-100">More Info<i
+                                    class="fa-solid fa-arrow-right"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% }} else { %>
+            <h1>No Jobs</h1>
+            <% } %>
+        </div>
+    </section>
+</body>
+
+</html>

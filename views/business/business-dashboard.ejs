@@ -1,0 +1,70 @@
+<%- include("../includes/head.ejs") %>
+<link rel="stylesheet" href="/css/business-dashboard.css">
+<script src="/scripts/matchRate.js" defer></script>
+<title><%= title %></title>
+</head>
+
+<body class="ff-primary bg-primary-300">
+    <%- include("../includes/logged-in-navigation.ejs") %>
+    <section class="company-dashboard-section grid">
+        <div class="company-dashboard-container bg-neutral-100 flex">
+            <h1 class="company-title fw-semi-bold text-neutral-500 fs-700"><%= pageTitle %></h1>
+            <% if (view === "businessDashboard" && jobs.length === 0) { %>
+            <div class="job-container">
+                <h2 class="fs-700 text-neutral-500">No jobs yet</h2>
+            </div>
+            <% } %>
+            <% if (view === "businessDashboard") { jobs.forEach(job => { %>
+            <div class="job-container flex bg-primary-300">
+                <h3 class="job-title text-neutral-500 fw-semi-bold fs-700"><%= job.job_title %></h3>
+                <div class="job-utility-container flex">
+                    <div class="job-applicant-container flex">
+                        <p>Applicant(s)</p>
+                        <p class="applicant-count fs-700"><%= job.applicant.length %></p>
+                        <a href="/business/view-applicants/<%= job.id %>"
+                            class="view-applicant-button flex bg-primary-500 text-neutral-100">View <i
+                                class="fa-solid fa-eye text-neutral-100"></i></a>
+                    </div>
+                    <div class="job-button-container flex">
+                        <a href="/business/edit-job/<%= job.id %>" class="grid job-button bg-primary-500"><i
+                                class="text-neutral-100 fa-solid fa-pen"></i></a>
+                        <form action="/business/delete-job/<%= job.id %>" method="POST">
+                            <button class="delete-job-button grid job-button bg-primary-500" type="submit"><i
+                                    class="text-neutral-100 fa-sharp fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% })} else if (view === "viewApplicants" && job.applicant.length === 0) { %>
+            <div class="job-container">
+                <h2 class="fs-700 text-neutral-500">No applicants yet</h2>
+            </div>
+            <% } %>
+            <% if (view === "viewApplicants") { for (let i = 0; i < job.applicant.length; i++) { %>
+            <div class="job-container flex bg-primary-300">
+                <h3 class="job-title text-neutral-500 fw-semi-bold fs-700"><%= job.applicant[i].first_name %>
+                    <%= job.applicant[i].last_name %></h3>
+                <div class="job-utility-container flex">
+                    <div class="match-rate-container grid">
+                        <p class="text-neutral-500">Match Rate</p>
+                        <div class="match-percentage-indicator grid">
+                            <span class="match-percentage text-neutral-500"><%= matchingRates[i] %>%</span>
+                        </div>
+                    </div>
+                    <div class="job-button-container flex">
+                        <a href="/business/view-applicant/<%= job.id %>/<%= job.applicant[i].id %>"
+                            class="grid job-button bg-primary-500 text-neutral-100"><i class="fa-solid fa-eye"></i></a>
+                        <form action="/business/delete-applicant/<%= job.id %>/<%= job.applicant[i].id %>"
+                            method="POST">
+                            <button class="delete-job-button grid job-button bg-primary-500" type="submit"><i
+                                    class="text-neutral-100 fa-sharp fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% }} %>
+        </div>
+    </section>
+</body>
+
+</html>

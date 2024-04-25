@@ -1,0 +1,49 @@
+.primary-header {
+    /* position: fixed; */
+    align-items: center;
+    width: 100vw;
+    height: 5rem;
+}
+
+.primary-navbar {
+    justify-content: space-between;
+    padding: 1rem 4rem;
+}
+
+.nav-left,
+.nav-right {
+    align-items: center;
+}
+
+.logo {
+    margin-right: 2rem;
+}
+
+.new-job-button {
+    padding: .3rem 1.5rem;
+    border-radius: 20px;
+}
+
+.new-job-button:hover {
+    background-color: var(--clr-primary-500);
+    color: var(--clr-neutral-100);
+    border: 1px solid var(--clr-neutral-100);
+}
+
+.nav-search-bar-input {
+    margin-right: .5rem;
+    padding: .35rem .75rem;
+    border-radius: 20px;
+}
+
+.nav-search-bar-button {
+    background-color: transparent;
+}
+
+.mobile-nav-toggle {
+    display: none;
+}
+
+.nav-button {
+    margin-left: 3rem;
+}

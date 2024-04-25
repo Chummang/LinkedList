@@ -1,0 +1,119 @@
+.create-company-section {
+    place-items: center;
+    height: calc(100vh - 5rem);
+    width: 100vw;
+}
+
+.create-company-form-container {
+    place-items: center;
+    padding: 3rem;
+    width: 45%;
+    border-radius: 20px;
+}
+
+.create-company-form {
+    flex-direction: column;
+    width: 100%;
+}
+
+.create-company-label {
+    margin-top: 1rem;
+}
+
+.create-company-input,
+.create-company-textarea {
+    margin-top: .5rem;
+    border-radius: 20px;
+}
+
+.create-company-input {
+    padding: .5rem 1rem;
+}
+
+.create-company-textarea {
+    padding: 1rem;
+    height: 10rem;
+    border: none;
+}
+
+.create-company-button {
+    align-self: center;
+    margin-top: 2.5rem;
+    padding: .3rem;
+    width: 30%;
+    border-radius: 20px;
+}
+
+/* user profile creation */
+.create-profile-section {
+    place-items: center;
+    width: 100vw;
+}
+
+.create-profile-form-container {
+    place-items: center;
+    margin: 5rem 0;
+    padding: 3rem;
+    width: 55%;
+    border-radius: 20px;
+}
+
+.name-input-container {
+    justify-content: space-between;
+}
+
+.name-input-container input {
+    width: 100%;
+}
+
+.name-input {
+    width: 45%;
+}
+
+.experience-textarea {
+    margin-bottom: 1rem;
+}
+
+.language-container {
+    margin-top: 1rem;
+    padding: 1.5rem 1rem;
+    height: 10rem;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.language-container>.language-tag:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.language-tag {
+    display: inline-block;
+    margin-bottom: .5rem;
+    padding: .25rem .85rem;
+    border-radius: 50px;
+}
+
+.reject-contact-container {
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.reject-contact-container form {
+    width: 100%;
+}
+
+.reject-button {
+    background-color: hsl(0, 50%, 56%);
+}
+
+.mail-button {
+    place-items: center;
+    margin-left: 3rem;
+}
+
+.reject-button,
+.mail-button {
+    width: 100%;
+}
