@@ -11,7 +11,7 @@ const businessRoutes = require("./routes/business");
 
 
 mongoose.connect(process.env.DBURI,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, () => {
+  { useNewUrlParser: true, useUnifiedTopology: true}, () => {
     console.log("Database Connected successfully!")
 });
 // session
