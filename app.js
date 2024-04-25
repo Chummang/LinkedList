@@ -10,7 +10,8 @@ const userRoutes = require("./routes/user");
 const businessRoutes = require("./routes/business");
 
 
-mongoose.connect(process.env.DBURI, () => {
+mongoose.connect(process.env.DBURI,
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, () => {
     console.log("Database Connected successfully!")
 });
 // session
